@@ -1,14 +1,21 @@
 :root {
-  --paper: #fbf9f3;
-  --paper-deep: #f3efe4;
+  --bg-top: #f2ecdd;
+  --bg-bottom: #ece4d0;
+  --panel-ink: #151b2a;
+  --panel-ink-2: #1d2438;
+  --card: #fffdf8;
   --ink: #181d27;
-  --ink-soft: #454c5c;
+  --ink-soft: #4a5162;
+  --cream: #f6efe0;
+  --cream-soft: #cfd4e0;
   --gold: #a98936;
+  --gold-bright: #c9a44a;
   --gold-soft: #cdbd8f;
   --gold-tint: rgba(169, 137, 54, 0.1);
-  --hairline: #e4ddc9;
-  --card: #ffffff;
-  --shadow: 0 10px 30px rgba(24, 29, 39, 0.07);
+  --hairline: #ddd3ba;
+  --shadow: 0 14px 34px rgba(24, 29, 39, 0.1);
+  --shadow-soft: 0 6px 18px rgba(24, 29, 39, 0.07);
+  --radius: 1.1rem;
   --measure: 46rem;
 }
 
@@ -24,14 +31,18 @@ html {
 body {
   margin: 0;
   font-family: "Figtree", sans-serif;
-  font-size: 1.0625rem;
-  line-height: 1.75;
+  font-size: 1.04rem;
+  line-height: 1.7;
   color: var(--ink);
-  background: var(--paper);
+  background:
+    radial-gradient(60rem 30rem at 110% -5%, rgba(201, 164, 74, 0.16), transparent 60%),
+    radial-gradient(50rem 26rem at -10% 15%, rgba(169, 137, 54, 0.1), transparent 55%),
+    linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+  background-attachment: fixed;
 }
 
 .wrap {
-  width: min(100% - 40px, 68rem);
+  width: min(100% - 32px, 66rem);
   margin: 0 auto;
 }
 
@@ -55,7 +66,7 @@ body {
   left: -999px;
   top: 0;
   background: var(--ink);
-  color: var(--paper);
+  color: var(--cream);
   padding: 0.6rem 1rem;
   z-index: 100;
 }
@@ -70,27 +81,27 @@ body {
   position: sticky;
   top: 0;
   z-index: 20;
-  background: rgba(251, 249, 243, 0.94);
+  background: rgba(21, 27, 42, 0.96);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--hairline);
+  border-bottom: 2px solid var(--gold);
 }
 
 .masthead-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  padding: 0.85rem 0;
+  gap: 0.8rem;
+  padding: 0.75rem 0;
   flex-wrap: wrap;
 }
 
 .masthead-brand {
   font-family: "Cinzel", serif;
   font-weight: 700;
-  font-size: 1.05rem;
-  letter-spacing: 0.14em;
+  font-size: 1rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ink);
+  color: var(--cream);
   text-decoration: none;
 }
 
@@ -101,20 +112,20 @@ body {
 }
 
 .masthead-nav a {
-  color: var(--ink-soft);
+  color: var(--cream-soft);
   text-decoration: none;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   letter-spacing: 0.02em;
-  padding: 0.4rem 0.7rem;
+  padding: 0.38rem 0.75rem;
   border-radius: 999px;
   transition: color 160ms ease, background 160ms ease;
 }
 
 .masthead-nav a:hover,
 .masthead-nav a:focus-visible {
-  color: var(--ink);
-  background: var(--gold-tint);
+  color: #fff;
+  background: rgba(201, 164, 74, 0.22);
 }
 
 /* ---------- Typography ---------- */
@@ -124,30 +135,35 @@ h2,
 h3 {
   font-family: "Cinzel", serif;
   color: var(--ink);
-  line-height: 1.15;
-  margin: 0 0 0.9rem;
+  line-height: 1.14;
+  margin: 0 0 0.8rem;
 }
 
 h1 {
-  font-size: clamp(1.9rem, 5.2vw, 3rem);
+  font-size: clamp(1.85rem, 5vw, 2.8rem);
   font-weight: 700;
 }
 
 h2 {
-  font-size: clamp(1.4rem, 3.4vw, 1.9rem);
+  font-size: clamp(1.35rem, 3.2vw, 1.8rem);
   font-weight: 600;
-  margin-top: 0.4rem;
+  position: relative;
+  padding-bottom: 0.55rem;
 }
 
-h3 {
-  font-size: 1.12rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  margin-top: 2rem;
+h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 3.2rem;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-soft));
 }
 
 p {
-  margin: 0 0 1.1rem;
+  margin: 0 0 1rem;
   color: var(--ink-soft);
 }
 
@@ -155,61 +171,92 @@ p strong {
   color: var(--ink);
 }
 
-section {
-  padding: 2.4rem 0 1.2rem;
+/* ---------- Article rhythm: cards, tighter spacing ---------- */
+
+main {
+  padding: 1.4rem 0 0;
 }
 
-/* ---------- Hero ---------- */
+section {
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  padding: 1.7rem clamp(1.2rem, 3vw, 2.1rem) 1rem;
+  margin: 0 auto 1.2rem;
+  scroll-margin-top: 5rem;
+}
+
+section.wrap.narrow {
+  max-width: min(100% - 32px, calc(var(--measure) + 4rem));
+}
+
+/* ---------- Hero: dark deco panel ---------- */
 
 .hero {
-  padding: 3.4rem 0 0.6rem;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(42rem 20rem at 85% -20%, rgba(201, 164, 74, 0.28), transparent 60%),
+    linear-gradient(160deg, var(--panel-ink-2), var(--panel-ink) 65%);
+  border: 1px solid rgba(201, 164, 74, 0.35);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(1.8rem, 4vw, 2.8rem);
+  margin: 0.4rem auto 1.2rem;
+  max-width: min(100% - 32px, 66rem);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(201, 164, 74, 0.05) 0 2px,
+    transparent 2px 18px
+  );
+  pointer-events: none;
+}
+
+.hero > * {
+  position: relative;
+}
+
+.hero h1 {
+  color: var(--cream);
+}
+
+.hero .lede {
+  color: var(--cream-soft);
+  font-size: 1.14rem;
+  line-height: 1.65;
+  max-width: 52rem;
+}
+
+.hero .lede strong {
+  color: var(--gold-soft);
 }
 
 .kicker {
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 1.1rem;
-}
-
-.lede {
-  font-size: 1.2rem;
-  line-height: 1.7;
+  color: var(--gold-bright);
+  margin-bottom: 0.9rem;
 }
 
 .byline {
-  font-size: 0.95rem;
-  color: var(--ink-soft);
-  border-top: 1px solid var(--hairline);
-  padding-top: 0.9rem;
-  margin-top: 1.4rem;
+  font-size: 0.92rem;
+  color: var(--cream-soft);
+  border-top: 1px solid rgba(201, 164, 74, 0.35);
+  padding-top: 0.8rem;
+  margin: 1.2rem 0 0;
 }
 
-/* ---------- Disclosure ---------- */
-
-.disclosure {
-  margin: 1.6rem 0 0.4rem;
-  padding: 1.15rem 1.3rem;
-  background: var(--gold-tint);
-  border: 1px solid var(--gold-soft);
-  border-left: 4px solid var(--gold);
-  border-radius: 0.7rem;
-}
-
-.disclosure p {
-  margin: 0;
-  font-size: 0.98rem;
-}
-
-.disclosure-title {
-  font-weight: 700;
-  font-size: 0.8rem !important;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 0.35rem !important;
+.byline strong {
+  color: var(--gold-soft);
 }
 
 /* ---------- Deco divider ---------- */
@@ -218,18 +265,23 @@ section {
   display: flex;
   justify-content: center;
   color: var(--gold);
-  padding: 2rem 0 0.4rem;
+  padding: 0.15rem 0 1.2rem;
+}
+
+.deco-divider svg {
+  height: 18px;
+  width: auto;
 }
 
 /* ---------- Comparison table ---------- */
 
 .table-wrap {
   overflow-x: auto;
-  margin-top: 1.4rem;
+  margin-top: 1.1rem;
   border: 1px solid var(--hairline);
   border-radius: 0.9rem;
-  background: var(--card);
-  box-shadow: var(--shadow);
+  background: #fff;
+  box-shadow: var(--shadow-soft);
 }
 
 .comparison-table {
@@ -240,25 +292,29 @@ section {
 
 .comparison-table th,
 .comparison-table td {
-  padding: 1rem 1.1rem;
+  padding: 0.9rem 1.05rem;
   text-align: left;
   vertical-align: top;
   border-bottom: 1px solid var(--hairline);
-  font-size: 0.97rem;
-  line-height: 1.6;
+  font-size: 0.95rem;
+  line-height: 1.55;
   color: var(--ink-soft);
 }
 
 .comparison-table thead th {
   font-family: "Figtree", sans-serif;
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--gold);
-  background: var(--paper-deep);
-  border-bottom: 1px solid var(--gold-soft);
+  color: var(--gold-soft);
+  background: var(--panel-ink);
+  border-bottom: 2px solid var(--gold);
   white-space: nowrap;
+}
+
+.comparison-table tbody tr:nth-child(even) {
+  background: #faf7ef;
 }
 
 .comparison-table tbody tr:last-child td {
@@ -270,20 +326,21 @@ section {
   color: var(--ink);
 }
 
-.comparison-table tr.ours {
-  background: var(--gold-tint);
+.comparison-table tr.ours,
+.comparison-table tbody tr.ours {
+  background: linear-gradient(90deg, rgba(201, 164, 74, 0.16), rgba(201, 164, 74, 0.06));
   box-shadow: inset 3px 0 0 var(--gold);
 }
 
 .chip {
   display: inline-block;
   margin-top: 0.45rem;
-  padding: 0.18rem 0.6rem;
+  padding: 0.16rem 0.6rem;
   border: 1px solid var(--gold-soft);
   border-radius: 999px;
   background: #fff;
   color: var(--gold);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -291,33 +348,53 @@ section {
 }
 
 .table-footnote {
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   color: var(--ink-soft);
-  font-style: italic;
   margin-top: 1rem;
+}
+
+.table-footnote a,
+.faq-list a {
+  color: var(--gold);
+  font-weight: 700;
+  text-decoration-color: var(--gold-soft);
+  text-underline-offset: 3px;
+}
+
+.table-footnote a:hover,
+.faq-list a:hover {
+  color: var(--ink);
 }
 
 /* ---------- FAQ ---------- */
 
 .faq-list {
   display: grid;
-  gap: 0.75rem;
-  margin-top: 1.2rem;
+  gap: 0.7rem;
+  margin: 1.1rem 0 1rem;
 }
 
 .faq-list details {
-  background: var(--card);
+  background: #fff;
   border: 1px solid var(--hairline);
-  border-radius: 0.8rem;
-  padding: 1rem 1.2rem;
-  box-shadow: var(--shadow);
+  border-left: 3px solid var(--gold-soft);
+  border-radius: 0.75rem;
+  padding: 0.95rem 1.15rem;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.faq-list details:hover {
+  box-shadow: var(--shadow-soft);
+}
+
+.faq-list details[open] {
+  border-left-color: var(--gold);
 }
 
 .faq-list summary {
   cursor: pointer;
   font-weight: 700;
   color: var(--ink);
-  list-style-position: outside;
 }
 
 .faq-list details[open] summary {
@@ -325,31 +402,44 @@ section {
 }
 
 .faq-list p {
-  margin: 0.75rem 0 0;
-  font-size: 0.98rem;
+  margin: 0.7rem 0 0;
+  font-size: 0.96rem;
 }
 
 /* ---------- Footer ---------- */
 
 .site-footer {
-  margin-top: 3rem;
-  padding: 2rem 0 2.6rem;
-  border-top: 1px solid var(--hairline);
-  background: var(--paper-deep);
+  margin-top: 1.6rem;
+  padding: 1.8rem 0 2.2rem;
+  background: var(--panel-ink);
+  border-top: 2px solid var(--gold);
+  text-align: center;
 }
 
 .site-footer p {
   margin: 0;
-  font-size: 0.88rem;
   line-height: 1.8;
-  color: var(--ink-soft);
+}
+
+.footer-main {
+  font-family: "Cinzel", serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  color: var(--cream);
+  margin-bottom: 0.35rem;
+}
+
+.footer-note {
+  font-size: 0.82rem;
+  color: var(--cream-soft);
 }
 
 /* ---------- Responsive ---------- */
 
 @media (max-width: 760px) {
   body {
-    font-size: 1rem;
+    font-size: 0.99rem;
+    background-attachment: scroll;
   }
 
   .masthead-row {
@@ -362,11 +452,11 @@ section {
   }
 
   section {
-    padding: 1.8rem 0 0.8rem;
+    padding: 1.3rem 1.1rem 0.7rem;
   }
 
   .hero {
-    padding-top: 2.2rem;
+    padding: 1.6rem 1.2rem;
   }
 
   /* Card-style table on small screens */
@@ -395,23 +485,27 @@ section {
 
   .comparison-table tbody {
     display: grid;
-    gap: 0.9rem;
+    gap: 0.8rem;
+  }
+
+  .comparison-table tbody tr:nth-child(even) {
+    background: #fff;
   }
 
   .comparison-table tr {
     border: 1px solid var(--hairline);
     border-radius: 0.9rem;
-    background: var(--card);
-    box-shadow: var(--shadow);
-    padding: 1.1rem 1.1rem;
+    background: #fff;
+    box-shadow: var(--shadow-soft);
+    padding: 1rem 1.05rem;
     display: grid;
-    gap: 0.75rem;
+    gap: 0.7rem;
   }
 
   .comparison-table tr.ours {
     border-color: var(--gold-soft);
-    background: linear-gradient(160deg, rgba(169, 137, 54, 0.1), #fff 55%);
-    box-shadow: var(--shadow), inset 3px 0 0 var(--gold);
+    background: linear-gradient(160deg, rgba(201, 164, 74, 0.16), #fff 55%);
+    box-shadow: var(--shadow-soft), inset 3px 0 0 var(--gold);
   }
 
   .comparison-table td {
@@ -422,8 +516,8 @@ section {
   .comparison-table td::before {
     content: attr(data-label);
     display: block;
-    margin-bottom: 0.15rem;
-    font-size: 0.68rem;
+    margin-bottom: 0.12rem;
+    font-size: 0.66rem;
     font-weight: 800;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -439,34 +533,4 @@ section {
   * {
     transition-duration: 0.01ms !important;
   }
-}
-
-/* Footer refinements */
-.site-footer {
-  text-align: center;
-}
-
-.footer-main {
-  font-family: "Cinzel", serif;
-  font-size: 0.95rem;
-  letter-spacing: 0.08em;
-  color: var(--ink);
-  margin-bottom: 0.4rem;
-}
-
-.footer-note {
-  font-size: 0.82rem;
-}
-
-.table-footnote a,
-.faq-list a {
-  color: var(--gold);
-  font-weight: 600;
-  text-decoration-color: var(--gold-soft);
-  text-underline-offset: 3px;
-}
-
-.table-footnote a:hover,
-.faq-list a:hover {
-  color: var(--ink);
 }
