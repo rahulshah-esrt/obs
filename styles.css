@@ -39,7 +39,7 @@ body {
   background: var(--bg-1);
 }
 
-/* Animated aurora backdrop */
+/* Static backdrop */
 body::before {
   content: "";
   position: fixed;
@@ -50,8 +50,6 @@ body::before {
     radial-gradient(52rem 30rem at 92% 22%, rgba(224, 189, 95, 0.16), transparent 62%),
     radial-gradient(46rem 30rem at 70% 96%, rgba(120, 92, 40, 0.2), transparent 60%),
     linear-gradient(165deg, var(--bg-2), var(--bg-1) 55%, var(--bg-3));
-  background-size: 160% 160%, 170% 170%, 160% 160%, 100% 100%;
-  animation: auroraShift 26s var(--ease) infinite alternate;
 }
 
 /* Fine grain texture overlay */
@@ -67,11 +65,6 @@ body::after {
     rgba(224, 189, 95, 0.03) 0 1px,
     transparent 1px 22px
   );
-}
-
-@keyframes auroraShift {
-  0% { background-position: 0% 0%, 100% 0%, 50% 100%, 0 0; }
-  100% { background-position: 40% 30%, 60% 40%, 30% 60%, 0 0; }
 }
 
 .wrap {
@@ -621,7 +614,6 @@ section.wrap.narrow {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  body::before { animation: none; }
   .hero::after { animation: none; display: none; }
   .hero { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
